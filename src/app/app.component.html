@@ -1,21 +1,59 @@
 <h1>Employee Management</h1>
 
+<div class="employee-form">
+
+  <input type="text" placeholder="Employee name" [(ngModel)]="newEmployee.name" />
+
+  <input type="email" placeholder="Employee email" [(ngModel)]="newEmployee.email" />
+
+  @if (editingEmployeeId === null) {
+
+  <button (click)="addEmployee()">
+    Add Employee
+  </button>
+
+  } @else {
+
+  <button (click)="updateEmployee()">
+    Update Employee
+  </button>
+
+  <button (click)="cancelEdit()">
+    Cancel
+  </button>
+
+  }
+
+</div>
+
+<hr>
+
 <table>
   <thead>
     <tr>
       <th>ID</th>
       <th>Name</th>
       <th>Email</th>
+      <th>Action</th>
     </tr>
   </thead>
 
   <tbody>
     @for (employee of employees; track employee.id) {
-      <tr>
-        <td>{{ employee.id }}</td>
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.email }}</td>
-      </tr>
+    <tr>
+      <td>{{ employee.id }}</td>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.email }}</td>
+      <td>
+        <button (click)="editEmployee(employee)">
+          Edit
+        </button>
+
+        <button (click)="deleteEmployee(employee.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
     }
   </tbody>
 </table>
